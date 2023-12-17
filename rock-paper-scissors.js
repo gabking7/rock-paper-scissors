@@ -20,29 +20,49 @@ function capitalizeWord(word) {
     return capWord;
 }
 
+let rock = document.getElementById("rock");
+rock.addEventListener("click", () => {
+    const computerChoice = getComputerChoice();
+    playRound("rock", computerChoice);
+})
+
+let paper = document.getElementById("paper");
+paper.addEventListener("click", () => {
+    const computerChoice = getComputerChoice();
+    playRound("paper", computerChoice);
+})
+
+let scissors = document.getElementById("scissors");
+scissors.addEventListener("click", () => {
+    const computerChoice = getComputerChoice();
+    playRound("scissors", computerChoice);
+})
+
+let results = document.getElementById("results");
+
 function playRound(playerSelection, computerSelection) {
 
     playerSelectionCapitalized = capitalizeWord(playerSelection);
     computerSelectionCapitalized = capitalizeWord(computerSelection);
 
     if (playerSelection == "rock" && computerSelection == "scissors") {
-        console.log("You Win! Rock beats Scissors!");
+        results.textContent = "You Win! Rock beats Scissors!";
         return true;
     }
     else if (playerSelection == "paper" && computerSelection == "rock") {
-        console.log("You Win! Paper beats Rock!");
+        results.textContent = "You Win! Paper beats Rock!";
         return true;
     }
     else if (playerSelection == "scissors" && computerSelection == "paper") {
-        console.log("You Win! Scissors beats Paper!")
+        results.textContent = "You Win! Scissors beats Paper!"
         return true;
     }
     else if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
-        console.log(`It's a Tie! You both chose ${playerSelectionCapitalized}!`);
+        results.textContent = `It's a Tie! You both chose ${playerSelectionCapitalized}!`;
         return 2;
     }
     else {
-        console.log(`You Lost! ${playerSelectionCapitalized} loses to ${computerSelectionCapitalized}!`);
+        results.textContent = `You Lost! ${playerSelectionCapitalized} loses to ${computerSelectionCapitalized}!`;
         return false;
     }
 }
@@ -51,25 +71,25 @@ function game() {
     let userScore = 0
     let computerScore = 0
     
-    for (let i = 0; i < 5; i++) {
-        const playerChoice = prompt("Rock, paper or scissors?").toLowerCase();
-        const computerSelection = getComputerChoice();
+    // for (let i = 0; i < 5; i++) {
+    //     const playerChoice = prompt("Rock, paper or scissors?").toLowerCase();
+    //     const computerSelection = getComputerChoice();
 
-        let result = playRound(playerChoice, computerSelection);
+    //     let result = playRound(playerChoice, computerSelection);
 
-        if (result == true) {
-            userScore += 1;
-        }
-        else if (result == false) {
-            computerScore += 1;
-        }
-        else {
-            userScore = userScore;
-            computerScore = computerScore;
-        }
+    //     if (result == true) {
+    //         userScore += 1;
+    //     }
+    //     else if (result == false) {
+    //         computerScore += 1;
+    //     }
+    //     else {
+    //         userScore = userScore;
+    //         computerScore = computerScore;
+    //     }
 
-        console.log(`User Score: ${userScore}, Computer Score: ${computerScore}`);
-    }
+    //     console.log(`User Score: ${userScore}, Computer Score: ${computerScore}`);
+    // }
     if (userScore > computerScore) {
         console.log("You won the game! :D")
     }
@@ -81,4 +101,4 @@ function game() {
     }
 }
 
-game();
+// game();
