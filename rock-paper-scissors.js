@@ -20,24 +20,45 @@ function capitalizeWord(word) {
     return capWord;
 }
 
-let rock = document.getElementById("rock");
-rock.addEventListener("click", () => {
-    const computerChoice = getComputerChoice();
-    playRound("rock", computerChoice);
-})
+let buttons = document.getElementsByTagName("button");
 
-let paper = document.getElementById("paper");
-paper.addEventListener("click", () => {
-    const computerChoice = getComputerChoice();
-    playRound("paper", computerChoice);
-})
+let userScore = 0;
+let computerScore = 0;
 
-let scissors = document.getElementById("scissors");
-scissors.addEventListener("click", () => {
-    const computerChoice = getComputerChoice();
-    playRound("scissors", computerChoice);
-})
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", () => {
+        const computerChoice = getComputerChoice();
+        playRound(buttons[i].textContent.toLowerCase(),computerChoice);
+        
+        let result = playRound(buttons[i].textContent.toLowerCase(), computerChoice);
 
+        if (result == true) {
+            userScore += 1;
+        }
+        else if (result == false) {
+            computerScore += 1;
+        }
+        else {
+            userScore = userScore;
+            computerScore = computerScore;
+        }
+
+        score.textContent = `Your Score: ${userScore} | Computer's Score: ${computerScore}`;
+
+        if (userScore == 5) {
+            results.textContent = "Congrats! You won the game!"
+            userScore = 0;
+            computerScore = 0;
+        }
+        else if (computerScore == 5) {
+            results.textContent = "Oh no! You lost the game."
+            userScore = 0;
+            computerScore = 0;
+        }
+    })
+}
+
+let score = document.getElementById("score");
 let results = document.getElementById("results");
 
 function playRound(playerSelection, computerSelection) {
@@ -66,39 +87,3 @@ function playRound(playerSelection, computerSelection) {
         return false;
     }
 }
-
-function game() {
-    let userScore = 0
-    let computerScore = 0
-    
-    // for (let i = 0; i < 5; i++) {
-    //     const playerChoice = prompt("Rock, paper or scissors?").toLowerCase();
-    //     const computerSelection = getComputerChoice();
-
-    //     let result = playRound(playerChoice, computerSelection);
-
-    //     if (result == true) {
-    //         userScore += 1;
-    //     }
-    //     else if (result == false) {
-    //         computerScore += 1;
-    //     }
-    //     else {
-    //         userScore = userScore;
-    //         computerScore = computerScore;
-    //     }
-
-    //     console.log(`User Score: ${userScore}, Computer Score: ${computerScore}`);
-    // }
-    if (userScore > computerScore) {
-        console.log("You won the game! :D")
-    }
-    else if (userScore == computerScore) {
-        console.log("It was a tie.");
-    }
-    else {
-        console.log("You lost the game! :(")
-    }
-}
-
-// game();
