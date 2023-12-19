@@ -46,14 +46,16 @@ for (let i = 0; i < buttons.length; i++) {
         score.textContent = `Your Score: ${userScore} | Computer's Score: ${computerScore}`;
 
         if (userScore == 5) {
-            results.textContent = "Congrats! You won the game!"
-            userScore = 0;
-            computerScore = 0;
+            results.textContent = "Congrats! You won the game! Refresh the page to prove your mettle again."
+            document.querySelectorAll("button").forEach(elem => {
+                elem.disabled = true;
+            })
         }
         else if (computerScore == 5) {
-            results.textContent = "Oh no! You lost the game."
-            userScore = 0;
-            computerScore = 0;
+            results.textContent = "Oh no! You lost the game. Refresh the page to play again, may luck be on your side."
+            document.querySelectorAll("button").forEach(elem => {
+                elem.disabled = true;
+            })
         }
     })
 }
